@@ -1,0 +1,127 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+	
+	<Package Name="Google Account - Microsoft Outlook Sync" Language="1033" Version="1.0.2.0" Manufacturer="Qwertyadmin" UpgradeCode="ba6eab57-520e-4c53-b235-977d82647088" InstallerVersion="200">
+
+		
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+		<Feature Id="ProductFeature" Title="Google Account - Microsoft Outlook Sync" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentRef Id="Registry_FriendlyName" />
+			<ComponentRef Id="Registry_Description" />
+			<ComponentRef Id="Registry_Manifest" />
+			<ComponentRef Id="Registry_LoadBehavior" />
+		</Feature>
+
+		<Media Id="1" Cabinet="googleSync.cab" EmbedCab="yes" />
+
+		<Property Id="VSTORUNTIMEREDIST">
+			<RegistrySearch Id="VSTORuntimeRedist" Root="HKLM" Key="SOFTWARE\Microsoft\VSTO Runtime Setup\v4R" Name="Version" Type="raw" />
+		</Property>
+		<Launch Condition="Installed OR VSTORUNTIMEREDIST&gt;=&quot;10.0.30319&quot;" Message="The Visual Studio 2010 Tools for Office Runtime is not installed. Please download and install from http://www.microsoft.com/en-us/download/details.aspx?id=20479." />
+
+		<PropertyRef Id="NETFRAMEWORK45" />
+		<Launch Condition="Installed OR NETFRAMEWORK45" Message="This application requires .NET Framework 4.5. Please install the .NET Framework 4.5 then run this installer again." />
+
+		<ui:WixUI Id="WixUI_Minimal" />
+
+		<WixVariable Id="WixUILicenseRtf" Value="EULA.rtf" />
+		
+	</Package>
+
+	<Fragment>
+			
+			<StandardDirectory Id="ProgramFilesFolder">
+				
+				<Directory Id="INSTALLFOLDER" Name="Google Account - Microsoft Outlook Sync" />
+				
+				<Component Id="Registry_FriendlyName">
+					<RegistryValue Id="RegKey_FriendlyName" Root="HKCU" Key="Software\Microsoft\Office\Outlook\AddIns\googleSyncAddIn" Name="FriendlyName" Value="Google Account - Microsoft Outlook Sync" Type="string" KeyPath="yes" />
+				</Component>
+				
+				<Component Id="Registry_Description">
+					<RegistryValue Id="RegKey_Description" Root="HKCU" Key="Software\Microsoft\Office\Outlook\AddIns\googleSyncAddIn" Name="Description" Value="Google Account - Microsoft Outlook Sync Add In" Type="string" KeyPath="yes" />
+				</Component>
+				
+				<Component Id="Registry_Manifest">
+					<RegistryValue Id="RegKey_Manifest" Root="HKCU" Key="Software\Microsoft\Office\Outlook\AddIns\googleSyncAddIn" Name="Manifest" Value="[INSTALLFOLDER]Google Account - Microsoft Outlook Sync.vsto|vstolocal" Type="string" KeyPath="yes" />
+				</Component>
+				
+				<Component Id="Registry_LoadBehavior">
+					<RegistryValue Id="RegKey_LoadBehavior" Root="HKCU" Key="Software\Microsoft\Office\Outlook\AddIns\googleSyncAddIn" Name="LoadBehavior" Value="3" Type="integer" KeyPath="yes" />
+				</Component>
+			
+			</StandardDirectory>
+		
+		</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<Component Id="OutlookAddin_vsto_Component">
+				<File Id="OutlookAddin_vsto" KeyPath="yes" Name="Google Account - Microsoft Outlook Sync.vsto" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="OutlookAddin_dll_manifest_Component">
+				<File Id="OutlookAddin_dll_manifest" KeyPath="yes" Name="Google Account - Microsoft Outlook Sync.dll.manifest" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="MSOfficeToolsCommon_dll_Component">
+				<File Id="MSOfficeToolsCommon_dll" KeyPath="yes" Name="Microsoft.Office.Tools.Common.v4.0.Utilities.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="MSOfficeToolsOutlook_dll_Component">
+				<File Id="MSOfficeToolsOutlook_dll" KeyPath="yes" Name="Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="OutlookAddin_dll_Component">
+				<File Id="OutlookAddin_dll" KeyPath="yes" Name="Google Account - Microsoft Outlook Sync.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Newtonsoft_Json_dll_Component">
+				<File Id="Newtonsoft_Json_dll" KeyPath="yes" Name="Newtonsoft.Json.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Google_Apis_PlatformServices_dll_Component">
+				<File Id="Google_Apis_PlatformServices_dll" KeyPath="yes" Name="Google.Apis.PlatformServices.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Google_Apis_PeopleService_v1_dll_Component">
+				<File Id="Google_Apis_PeopleService_v1_dll" KeyPath="yes" Name="Google.Apis.PeopleService.v1.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Google_Apis_dll_Component">
+				<File Id="Google_Apis_dll" KeyPath="yes" Name="Google.Apis.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Google_Apis_Discovery_v1_dll_Component">
+				<File Id="Google_Apis_Discovery_v1_dll" KeyPath="yes" Name="Google.Apis.Discovery.v1.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Google_Apis_Core_dll_Component">
+				<File Id="Google_Apis_Core_dll" KeyPath="yes" Name="Google.Apis.Core.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Google_Apis_Calendar_v3_dll_Component">
+				<File Id="Google_Apis_Calendar_v3_dll" KeyPath="yes" Name="Google.Apis.Calendar.v3.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Google_Apis_Auth_PlatformServices_dll_Component">
+				<File Id="Google_Apis_Auth_PlatformServices_dll" KeyPath="yes" Name="Google.Apis.Auth.PlatformServices.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="Google_Apis_Auth_dll_Component">
+				<File Id="Google_Apis_Auth_dll" KeyPath="yes" Name="Google.Apis.Auth.dll" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="credentials_json_Component">
+				<File Id="credentials_json" KeyPath="yes" Name="credentials.json" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+			<Component Id="calendarData_xml_Component">
+				<File Id="calendarData_xml" KeyPath="yes" Name="calendarData.xml" Source="$(var.AddinFiles)">
+				</File>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

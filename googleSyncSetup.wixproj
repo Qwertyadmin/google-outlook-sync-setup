@@ -1,0 +1,13 @@
+<Project Sdk="WixToolset.Sdk/4.0.3">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DefineConstants>Debug;AddinFiles=..\googleSync\bin\$(Configuration)\</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineConstants>AddinFiles=..\googleSync\bin\$(Configuration)\</DefineConstants>
+    <SuppressValidation>False</SuppressValidation>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
+    <PackageReference Include="WixToolset.NetFx.wixext" Version="4.0.3" />
+  </ItemGroup>
+</Project>
