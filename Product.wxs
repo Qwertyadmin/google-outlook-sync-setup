@@ -1,6 +1,6 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
 	
-	<Package Name="Google Account - Microsoft Outlook Sync" Language="1033" Version="1.0.2.0" Manufacturer="Qwertyadmin" UpgradeCode="ba6eab57-520e-4c53-b235-977d82647088" InstallerVersion="200">
+	<Package Name="Google Account - Microsoft Outlook Sync" Language="1033" Version="1.1.0.0" Manufacturer="Qwertyadmin" UpgradeCode="ba6eab57-520e-4c53-b235-977d82647088" InstallerVersion="200">
 
 		
 
@@ -116,10 +116,6 @@
 			</Component>
 			<Component Id="credentials_json_Component">
 				<File Id="credentials_json" KeyPath="yes" Name="credentials.json" Source="$(var.AddinFiles)">
-				</File>
-			</Component>
-			<Component Id="calendarData_xml_Component">
-				<File Id="calendarData_xml" KeyPath="yes" Name="calendarData.xml" Source="$(var.AddinFiles)">
 				</File>
 			</Component>
 		</ComponentGroup>
